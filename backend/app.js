@@ -1,18 +1,12 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
-import dotenv from 'dotenv';
-
-dotenv.config();
-console.log("DIR:", __dirname)
-import pool from './config/Database.js'; 
+import pool from './config/Database.js';
 
 const app = express();
-
-console.log("DB_HOST:", process.env.DB_HOST);
-console.log("DB_USER:", process.env.DB_USER);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-console.log("DB_NAME:", process.env.DB_NAME);
 
 // Middlewares
 app.use(cors({

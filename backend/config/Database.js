@@ -1,9 +1,7 @@
-// import dotenv from "dotenv";
-import mysql2 from "mysql2";
+import dotenv from 'dotenv';
+dotenv.config();
 
-// dotenv.config({ 
-//     path: '../.env',
-// }); // Adjust the path to point to your .env file
+import mysql2 from "mysql2";
 
 const pool = mysql2.createPool({
     port: process.env.DB_PORT,
@@ -13,11 +11,6 @@ const pool = mysql2.createPool({
     password: process.env.DB_PASSWORD,
     connectionLimit: 10,
 });
-
-console.log("DB_HOST:", process.env.DB_HOST);
-console.log("DB_USER:", process.env.DB_USER);
-console.log("DB_PASSWORD:", process.env.DB_PASSWORD);
-console.log("DB_NAME:", process.env.DB_NAME);
 
 pool.query("SELECT * FROM biodata", (err, results, fields) => {
     if (err) {
