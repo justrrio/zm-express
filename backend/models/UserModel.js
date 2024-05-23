@@ -1,4 +1,3 @@
-import sql2 from 'sql2'
-import db from "../config/DatabaseSequelize.js";
-
+import mysql2 from 'mysql2'
+import dotenv from 'dotenv'
 
