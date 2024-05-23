@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZM Express</title>
+</head>
+<body>
+    <button onclick="getResult('heads')">heads</button>
+    <button onclick="getResult('tails')">tails</button>
+
+    <p>You chose: <span class="answer"></span></p>
+
+    <hr>
+    <span>Message:</span>
+    <input class="inputMsg" type="text" name="request">
+    <br>
+    <button onclick="sendRequest()">Send Request</button>
+    <p class="response"></p>
+
+    <script>
+        let buttonElem = document.querySelectorAll('button')
+
+        function getResult(choice) {
+            let spanElem = document.getElementsByClassName('answer')[0]
+            spanElem.innerText = choice
+        }
+    </script>
+    <script src="client.js"></script>
+</body>
+</html>
