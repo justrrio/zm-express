@@ -12,7 +12,7 @@ function sendRequest() {
         },
         body: JSON.stringify({message: inputElem})
     })
-    .then((response) => response.text()) // Wait for the Promise from response.json() to resolve
+    .then((response) => response.text()) // Wait for the Promise from response.text() to resolve
     .then((data) => {
         pElem.innerText = data;
         console.log(data);

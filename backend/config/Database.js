@@ -12,11 +12,4 @@ const pool = mysql2.createPool({
     connectionLimit: 10,
 });
 
-pool.query("SELECT * FROM biodata", (err, results, fields) => {
-    if (err) {
-        return console.log(err);
-    }
-    return console.log(results);
-});
-
 export default pool;

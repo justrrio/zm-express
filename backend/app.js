@@ -4,7 +4,7 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
-import pool from './config/Database.js';
+import UserRoutes from './routes/UserRoute.js';
 
 const app = express();
 
@@ -22,14 +22,10 @@ app.use(session({
     }
 }));
 app.use(express.json()); // Send json data to the client
+app.use(UserRoutes);
 
 // Listen to specified port
 app.listen(process.env.APP_PORT, () => {
     console.log("Server is running.");
     console.log("CPU Usage:", process.cpuUsage().user / 1000);
-});
-
-app.post('/sendMessage', (req, res) => {
-    console.log("MESSAGE:", req.body); // Log the message body to the console
-    res.send("Halo juga, saya baik-baik saja 😁!");
 });
