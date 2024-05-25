@@ -1,0 +1,55 @@
+// Create new user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "andi",
+    "email": "andi@gmail.com",
+    "password": "12345",
+    "confirmPassword": "12345",
+    "phoneNumber": "+628323213234",
+    "role": "Admin"
+}
+
+// Tono: 54321
+// Andi: 12345
+
+###
+
+GET http://localhost:5000/users
+
+### 
+// Update user
+PATCH http://localhost:5000/users/4eecc385-c92b-4bae-bdf9-d8c7dc2f4d3f
+Content-Type: application/json
+
+{
+    "name": "Tono",
+    "email": "tono@gmail.com",
+    "password": "54321",
+    "confirmPassword": "54321",
+    "phoneNumber": "+628752323234",
+    "role": "Customer"
+}
+
+### 
+// Delete user
+DELETE http://localhost:5000/users/a242c71b-90fa-479a-a8e2-48dad88e2d64
+
+### 
+// Login
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "andi@gmail.com",
+    "password": "12345"
+}
+
+###
+// Get login info
+GET http://localhost:5000/me
+
+###
+// Logout
+DELETE http://localhost:5000/logout

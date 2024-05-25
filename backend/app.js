@@ -5,6 +5,7 @@ import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
 import UserRoutes from './routes/UserRoute.js';
+import AuthRoutes from './routes/AuthRoute.js';
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(session({
     }
 }));
 app.use(express.json()); // Send json data to the client
+app.use(AuthRoutes);
 app.use(UserRoutes);
 
 // Listen to specified port
