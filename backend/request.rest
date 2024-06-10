@@ -1,3 +1,38 @@
+// Tono: 54321
+// Andi: 12345
+
+### Login as an admin
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "andi@gmail.com",
+    "password": "12345"
+}
+
+### 
+// Login as a customer
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "tono@gmail.com",
+    "password": "54321"
+}
+
+###
+// Get login info
+GET http://localhost:5000/me
+
+###
+// Logout
+DELETE http://localhost:5000/logout
+
+###
+// Get all user
+GET http://localhost:5000/users
+
+###
 // Create new user
 POST http://localhost:5000/users
 Content-Type: application/json
@@ -10,13 +45,6 @@ Content-Type: application/json
     "phoneNumber": "+628323213234",
     "role": "Admin"
 }
-
-// Tono: 54321
-// Andi: 12345
-
-###
-
-GET http://localhost:5000/users
 
 ### 
 // Update user
@@ -35,21 +63,3 @@ Content-Type: application/json
 ### 
 // Delete user
 DELETE http://localhost:5000/users/a242c71b-90fa-479a-a8e2-48dad88e2d64
-
-### 
-// Login
-POST http://localhost:5000/login
-Content-Type: application/json
-
-{
-    "email": "andi@gmail.com",
-    "password": "12345"
-}
-
-###
-// Get login info
-GET http://localhost:5000/me
-
-###
-// Logout
-DELETE http://localhost:5000/logout

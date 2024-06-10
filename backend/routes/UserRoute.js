@@ -5,14 +5,16 @@ import {
     createUserController,
     updateUserController,
     deleteUserController,
-} from "../controllers/UserController.js"
+} from "../controllers/UserController.js";
+// Verifikasi akun user
+import { verifyUser, adminOnly } from "../middleware/AuthUserMiddleware.js";
 
 const router = express.Router();
 
-router.get("/users", getUsersController);
-router.get("/users/:id", getUserByIdController);
-router.post("/users", createUserController);
-router.patch("/users/:id", updateUserController);
-router.delete("/users/:id", deleteUserController);
+router.get("/users", verifyUser, adminOnly, getUsersController);
+router.get("/users/:id", verifyUser, adminOnly, getUserByIdController);
+router.post("/users", verifyUser, adminOnly, createUserController);
+router.patch("/users/:id", verifyUser, adminOnly, updateUserController);
+router.delete("/users/:id", verifyUser, adminOnly, deleteUserController);
 
 export default router;

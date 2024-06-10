@@ -19,7 +19,7 @@ export const Login = async (req, res) => {
         const responseGetUserByEmail = await getUserByEmailModel(email).catch((message) => {
             throw new Error(message);
         });
-        
+        // kirim pesan jika email tidak terdaftar 
         if (Array.isArray(responseGetUserByEmail) && responseGetUserByEmail.length === 0) {
             return res.status(404).json({message: "Email tidak terdaftar"});
         }
@@ -41,18 +41,18 @@ export const Login = async (req, res) => {
     }
 }
 
-export const getLoginInfo = async (req, res) => {
+export const Me = async (req, res) => {
     try {
         // Cek session
         if (!req.session.userId) return res.status(400).json({message: "Mohon login ke akun Anda!"});
 
         console.log("SESSION:", req.session.userId);
 
-        // Cek data di database
+        // Cek apakah user terdaftar di database
         const response = await getUserByIdModel(req.session.userId).catch((message) => {
             throw new Error(message);
         });
-
+        
         const uuid = response[0].uuid;
         const email = response[0].email;
         const name = response[0].nama_lengkap;
