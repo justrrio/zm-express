@@ -7,7 +7,6 @@ dotenv.config();
 
 import express from 'express';
 import cors from 'cors'; // Middleware
-import db from './config/Database.js'; // db
 
 // Session
 import MySQLStore from 'express-mysql-session'; // Session
@@ -16,6 +15,7 @@ import session from 'express-session'; // Session from express
 // Routes
 import UserRoutes from './routes/UserRoute.js';
 import AuthRoutes from './routes/AuthRoute.js';
+import PengirimanRoutes from './routes/PengirimanRoute.js';
 
 const app = express();
 
@@ -28,7 +28,7 @@ const options = {
     port: process.env.DB_PORT,
     connectionLimit: 10
     // createDatabaseTable: true
-}
+};
 const sessionStore = MySQLStore(options);
 
 // Middleware
@@ -48,6 +48,7 @@ app.use(session({
 app.use(express.json()); // Send json data to the client
 app.use(AuthRoutes);
 app.use(UserRoutes);
+app.use(PengirimanRoutes);
 
 // Listen to specified port
 app.listen(process.env.APP_PORT, () => {

@@ -1,22 +1,21 @@
 import pool from '../config/Database.js';
-import { v4 as uuidv4 } from 'uuid';
+import { uuidv7 } from "uuidv7";
 
 export const getUsersModel = () => {
     return new Promise((resolve, reject) => {
-        pool.query("SELECT uuid, email, nama_lengkap, no_tlp, role FROM users", (err, results, fields) => {
+        pool.query("SELECT uuid_user, email, nama_lengkap, no_tlp, role FROM users WHERE deleted_date IS NULL", (err, results, fields) => {
             if (err) {
                 reject(err);
             } else {
-                console.log("UUID:", uuidv4());
                 resolve(results);
             }
         })
     });
 }
 
-export const getUserByIdModel = (id) => {
+export const getUserByIdModel = (uuid_user) => {
     return new Promise((resolve, reject) => {
-        pool.query("SELECT uuid, email, nama_lengkap, no_tlp, role FROM users WHERE uuid=?", [id], (err, result, fields) => {
+        pool.query("SELECT uuid_user, email, nama_lengkap, no_tlp, role FROM users WHERE uuid_user=? AND deleted_date IS NULL", [uuid_user], (err, result, fields) => {
             if (err) {
                 reject(err);
             } else {
@@ -28,7 +27,7 @@ export const getUserByIdModel = (id) => {
 
 export const getUserByEmailModel = (email) => {
     return new Promise((resolve, reject) => {
-        pool.query("SELECT * FROM users WHERE email=?", [email], (err, result, fields) => {
+        pool.query("SELECT * FROM users WHERE email=? AND deleted_date IS NULL", [email], (err, result, fields) => {
             if (err) {
                 reject(err);
             } else {
@@ -40,9 +39,9 @@ export const getUserByEmailModel = (email) => {
 
 export const createUserModel = (name, email, hashedPassword, phoneNumber, role) => {
     return new Promise((resolve, reject) => {
-        const uuid = uuidv4();
+        const uuid_user = uuidv7();
 
-        pool.query("INSERT INTO users(uuid, email, nama_lengkap, password, no_tlp, role, created_by, created_date, updated_by, updated_date) VALUES(?, ?, ?, ?, ?, ?, NULL, CURRENT_TIMESTAMP, NULL, CURRENT_TIMESTAMP)", [uuid, email, name, hashedPassword, phoneNumber, role], (err, results, fields) => {
+        pool.query("INSERT INTO users(uuid_user, email, nama_lengkap, password, no_tlp, role, created_date, updated_date) VALUES(?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)", [uuid_user, email, name, hashedPassword, phoneNumber, role], (err, results, fields) => {
             if (err) {
                 reject(err.message);
             } else {
@@ -52,9 +51,9 @@ export const createUserModel = (name, email, hashedPassword, phoneNumber, role) 
     });
 }
 
-export const updateUserModel = (id, name, email, hashedPassword, phoneNumber) => {
+export const updateUserModel = (uuid_user, name, email, hashedPassword, phoneNumber) => {
     return new Promise((resolve, reject) => {
-        pool.query("UPDATE users SET email=?, nama_lengkap=?, password=?, no_tlp=? where uuid=?", [email, name, hashedPassword, phoneNumber, id], (err, result, fields) => {
+        pool.query("UPDATE users SET email=?, nama_lengkap=?, password=?, no_tlp=?, updated_by=CURRENT_TIMESTAMP where uuid_user=?", [email, name, hashedPassword, phoneNumber, uuid_user], (err, result, fields) => {
             if (err) {
                 reject(err.message);
             } else {
@@ -64,9 +63,9 @@ export const updateUserModel = (id, name, email, hashedPassword, phoneNumber) =>
     });
 }
 
-export const deleteUserModel = async (id) => {
+export const deleteUserModel = async (uuid_user) => {
     return new Promise((resolve, reject) => {
-        pool.query("DELETE FROM users WHERE uuid=?", [id], (err, result, fields) => {
+        pool.query("UPDATE users SET deleted_date=CURRENT_TIMESTAMP WHERE uuid_user=?", [uuid_user], (err, result, fields) => {
             if (err) {
                 reject(err.message);
             } else {

@@ -1,9 +1,10 @@
-import { response } from "express";
 import { 
     getUserByEmailModel, 
     getUserByIdModel,
 } from "../models/UserModel.js";
 import argon2 from 'argon2';
+import { uuidv7 } from 'uuidv7';
+
 
 export const Login = async (req, res) => {
     try {
@@ -30,12 +31,12 @@ export const Login = async (req, res) => {
         if(!match) return res.status(400).json({message: "Password tidak sesuai!"}); 
         
         // Set session
-        req.session.userId = responseGetUserByEmail[0].uuid;
-        const uuid = responseGetUserByEmail[0].uuid;
+        req.session.uuid_user = responseGetUserByEmail[0].uuid_user;
+        const uuid_user = responseGetUserByEmail[0].uuid_user;
         const name = responseGetUserByEmail[0].nama_lengkap;
         const role = responseGetUserByEmail[0].role;
 
-        res.status(200).json({uuid, name, email, role});
+        res.status(200).json({uuid_user, name, email, role});
     } catch (error) {
         res.status(400).json({errorMessage: error.message});
     }
@@ -44,22 +45,22 @@ export const Login = async (req, res) => {
 export const Me = async (req, res) => {
     try {
         // Cek session
-        if (!req.session.userId) return res.status(400).json({message: "Mohon login ke akun Anda!"});
+        if (!req.session.uuid_user) return res.status(400).json({message: "Mohon login ke akun Anda!"});
 
-        console.log("SESSION:", req.session.userId);
+        console.log("SESSION:", req.session.uuid_user);
 
         // Cek apakah user terdaftar di database
-        const response = await getUserByIdModel(req.session.userId).catch((message) => {
+        const response = await getUserByIdModel(req.session.uuid_user).catch((message) => {
             throw new Error(message);
         });
         
-        const uuid = response[0].uuid;
+        const uuid_user = response[0].uuid_user;
         const email = response[0].email;
         const name = response[0].nama_lengkap;
         const phoneNumber = response[0].no_tlp;
         const role = response[0].role;
 
-        res.status(200).json({uuid, email, name, phoneNumber, role});
+        res.status(200).json({uuid_user, email, name, phoneNumber, role});
     } catch (error) {
         res.status(400).json({errorMessage: error.message});
     }

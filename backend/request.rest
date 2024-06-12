@@ -33,12 +33,12 @@ DELETE http://localhost:5000/logout
 GET http://localhost:5000/users
 
 ###
-// Create new user
+// Create new user (Admin)
 POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "andi",
+    "name": "Andi Susanto",
     "email": "andi@gmail.com",
     "password": "12345",
     "confirmPassword": "12345",
@@ -46,13 +46,27 @@ Content-Type: application/json
     "role": "Admin"
 }
 
-### 
+###
+// Create new user (Customer)
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Tono Hartono",
+    "email": "tono@gmail.com",
+    "password": "54321",
+    "confirmPassword": "54321",
+    "phoneNumber": "+628752323234",
+    "role": "Customer"
+}
+
+###
 // Update user
 PATCH http://localhost:5000/users/4eecc385-c92b-4bae-bdf9-d8c7dc2f4d3f
 Content-Type: application/json
 
 {
-    "name": "Tono",
+    "name": "Tono Hartono",
     "email": "tono@gmail.com",
     "password": "54321",
     "confirmPassword": "54321",
@@ -63,3 +77,15 @@ Content-Type: application/json
 ### 
 // Delete user
 DELETE http://localhost:5000/users/a242c71b-90fa-479a-a8e2-48dad88e2d64
+
+### 
+// Get pengiriman
+
+GET http://localhost:5000/pengiriman
+
+###
+GET https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json
+
+###
+GET https://emsifa.github.io/api-wilayah-indonesia/api/regencies/36.json
+
