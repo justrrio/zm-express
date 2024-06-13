@@ -30,3 +30,15 @@ Content-Type: application/json
     "deskripsi": "deskripsi_value",
     "no_resi": "202302022023"
 }
+
+###
+// Get provinsi
+GET http://localhost:5000/provinsi
+
+### 
+// Get kabupaten/kota
+GET http://localhost:5000/kabupaten-kota
+
+###
+// Get layanan
+Get http://localhost:5000/layanan

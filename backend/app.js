@@ -16,6 +16,8 @@ import session from 'express-session'; // Session from express
 import UserRoutes from './routes/UserRoute.js';
 import AuthRoutes from './routes/AuthRoute.js';
 import PengirimanRoutes from './routes/PengirimanRoute.js';
+import AgenRoutes from './routes/AgenRoute.js'
+import WarehouseRoutes from './routes/WarehouseRoute.js'
 
 const app = express();
 
@@ -49,6 +51,8 @@ app.use(express.json()); // Send json data to the client
 app.use(AuthRoutes);
 app.use(UserRoutes);
 app.use(PengirimanRoutes);
+app.use(AgenRoutes);
+app.use(WarehouseRoutes);
 
 // Listen to specified port
 app.listen(process.env.APP_PORT, () => {

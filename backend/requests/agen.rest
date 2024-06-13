@@ -1,0 +1,12 @@
+// Get all agen
+GET http://localhost:5000/agen
+
+###
+// Create new agen
+POST http://localhost:5000/agen
+Content-Type: application/json
+
+{
+    "nama_agen": "Agen Sukamaju",
+    "alamat_agen": "Jl. Maju Sendiri II"
+}

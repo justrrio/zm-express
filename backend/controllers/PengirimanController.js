@@ -3,6 +3,9 @@ import {
     getPengirimanByIdModel,
     createPengirimanModel,
     updatePengirimanModel,
+    getProvinsiModel,
+    getKabupatenKotaModel,
+    getLayananModel,
 } from "../models/PengirimanModel.js"
 
 export const getPengirimanController = async (req, res) => {
@@ -106,5 +109,32 @@ export const updatePengirimanController = async (req, res) => {
         res.status(200).json({messagePengiriman: "Pengiriman telah berhasil diupdate!"});
     } catch (err) {
         res.status(500).json({errMessagePengiriman: err.message});
+    }
+}
+
+export const getProvinsiController = async (req, res) => {
+    try {
+        const results = await getProvinsiModel();
+        res.status(200).json({results});
+    } catch (err) {
+        res.status(500).json({errMessageLokasi: err.message});
+    }
+}
+
+export const getKabupatenKotaController = async (req, res) => {
+    try {
+        const results = await getKabupatenKotaModel();
+        res.status(200).json({results});
+    } catch (err) {
+        res.status(500).json({errMessageLokasi: err.message});
+    }
+}
+
+export const getLayananController = async (req, res) => {
+    try {
+        const results = await getLayananModel();
+        res.status(200).json({results});
+    } catch (err) {
+        res.status(500).json({errMessageLokasi: err.message});
     }
 }

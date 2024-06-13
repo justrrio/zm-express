@@ -1,5 +1,5 @@
-import { query } from "express";
 import pool from "../config/Database.js";
+import { uuidv7 } from 'uuidv7';
 
 /**
  * Get pengiriman data from the database.
@@ -70,8 +70,9 @@ export const createPengirimanModel = (pengirimanData) => {
         );
     `;
 
+    const uuid_pengiriman = uuidv7();
     const values = [
-        pengirimanData.uuid_pengiriman,
+        uuid_pengiriman,
         pengirimanData.uuid_user,
         pengirimanData.id_kategori_barang,
         pengirimanData.nama_pengirim,
@@ -165,3 +166,49 @@ export const updatePengirimanModel = (pengirimanData) => {
         });
     });
 }
+
+// Get Provinsi
+export const getProvinsiModel = () => {
+    const query = `SELECT * FROM provinsi`;
+    
+    return new Promise((resolve, reject) => {
+        pool.query(query, (err, results, fields) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        })
+    })
+}
+
+// Get Kabupaten/Kota
+export const getKabupatenKotaModel = () => {
+    const query = `SELECT * FROM kabupaten_kota;`;
+    
+    return new Promise((resolve, reject) => {
+        pool.query(query, (err, results, fields) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        })
+    })
+}
+
+// Get layanan
+export const getLayananModel = () => {
+    const query = `SELECT * FROM layanan`;
+    
+    return new Promise((resolve, reject) => {
+        pool.query(query, (err, results, fields) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        })
+    })
+}
+
