@@ -1,3 +1,4 @@
+import { query } from "express";
 import pool from "../config/Database.js";
 
 /**
@@ -30,7 +31,7 @@ export const getPengirimanModel = () => {
     });
 }
 
-export const getPengirimanByIdModel = (id) => {
+export const getPengirimanByIdModel = (uuid_user) => {
     const query = `
         SELECT 
             nama_pengirim, p_pengirim.nama_provinsi AS p_pengirim, kk_pengirim.nama_kabupaten_kota AS kk_pengirim, kode_pos_pengirim, no_tlp_pengirim, 
@@ -43,7 +44,7 @@ export const getPengirimanByIdModel = (id) => {
         INNER JOIN kabupaten_kota AS kk_pengirim ON kk_pengirim.id_kabupaten_kota = pengiriman.id_kabupaten_kota_pengirim
         INNER JOIN kabupaten_kota AS kk_penerima ON kk_penerima.id_kabupaten_kota = pengiriman.id_kabupaten_kota_penerima
         INNER JOIN layanan AS l ON (l.id_layanan = pengiriman.id_layanan)
-        WHERE pengiriman.id_pengiriman = ${id} AND pengiriman.deleted_date IS NULL; 
+        WHERE pengiriman.uuid_user = '${uuid_user}' AND pengiriman.deleted_date IS NULL; 
     `
     return new Promise((resolve, reject) => {
         pool.query(query, (err, results, field) => {
@@ -54,4 +55,113 @@ export const getPengirimanByIdModel = (id) => {
             }
         });
     })
+}
+
+export const createPengirimanModel = (pengirimanData) => {
+    const query = `
+        INSERT INTO pengiriman (
+            uuid_pengiriman, uuid_user, id_kategori_barang, nama_pengirim, id_provinsi_pengirim, 
+            id_kabupaten_kota_pengirim, kode_pos_pengirim, no_tlp_pengirim, 
+            nama_penerima, id_provinsi_penerima, id_kabupaten_kota_penerima, 
+            kode_pos_penerima, no_tlp_penerima, nama_barang, jumlah_barang, 
+            berat, harga_pengiriman, tanggal, id_layanan, deskripsi, no_resi, created_date, updated_date
+        ) VALUES (
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+        );
+    `;
+
+    const values = [
+        pengirimanData.uuid_pengiriman,
+        pengirimanData.uuid_user,
+        pengirimanData.id_kategori_barang,
+        pengirimanData.nama_pengirim,
+        pengirimanData.id_provinsi_pengirim,
+        pengirimanData.id_kabupaten_kota_pengirim,
+        pengirimanData.kode_pos_pengirim,
+        pengirimanData.no_tlp_pengirim,
+        pengirimanData.nama_penerima,
+        pengirimanData.id_provinsi_penerima,
+        pengirimanData.id_kabupaten_kota_penerima,
+        pengirimanData.kode_pos_penerima,
+        pengirimanData.no_tlp_penerima,
+        pengirimanData.nama_barang,
+        pengirimanData.jumlah_barang,
+        pengirimanData.berat,
+        pengirimanData.harga_pengiriman,
+        pengirimanData.tanggal,
+        pengirimanData.id_layanan,
+        pengirimanData.deskripsi,
+        pengirimanData.no_resi,
+    ];
+
+    return new Promise((resolve, reject) => {
+        pool.query(query, values, (err, results, fields) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
+};
+
+export const updatePengirimanModel = (pengirimanData) => {
+    const query = `
+        UPDATE pengiriman
+        SET
+            uuid_user = ?, 
+            id_kategori_barang = ?, 
+            nama_pengirim = ?, 
+            id_provinsi_pengirim = ?, 
+            id_kabupaten_kota_pengirim = ?, 
+            kode_pos_pengirim = ?, 
+            no_tlp_pengirim = ?, 
+            nama_penerima = ?, 
+            id_provinsi_penerima = ?, 
+            id_kabupaten_kota_penerima = ?, 
+            kode_pos_penerima = ?, 
+            no_tlp_penerima = ?, 
+            nama_barang = ?, 
+            jumlah_barang = ?, 
+            berat = ?, 
+            harga_pengiriman = ?, 
+            tanggal = ?, 
+            id_layanan = ?, 
+            deskripsi = ?
+            updated_date = CURRENT_TIMESTAMP
+        WHERE
+            no_resi = ?;
+    `;
+    const values = [
+        pengirimanData.uuid_pengiriman,
+        pengirimanData.uuid_user,
+        pengirimanData.id_kategori_barang,
+        pengirimanData.nama_pengirim,
+        pengirimanData.id_provinsi_pengirim,
+        pengirimanData.id_kabupaten_kota_pengirim,
+        pengirimanData.kode_pos_pengirim,
+        pengirimanData.no_tlp_pengirim,
+        pengirimanData.nama_penerima,
+        pengirimanData.id_provinsi_penerima,
+        pengirimanData.id_kabupaten_kota_penerima,
+        pengirimanData.kode_pos_penerima,
+        pengirimanData.no_tlp_penerima,
+        pengirimanData.nama_barang,
+        pengirimanData.jumlah_barang,
+        pengirimanData.berat,
+        pengirimanData.harga_pengiriman,
+        pengirimanData.tanggal,
+        pengirimanData.id_layanan,
+        pengirimanData.deskripsi,
+        pengirimanData.no_resi,
+    ];
+    return new Promise((resolve, reject) => {
+        pool.query(query, values, (err, results, fields) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results);
+            }
+        });
+    });
 }

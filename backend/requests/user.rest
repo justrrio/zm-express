@@ -10,7 +10,7 @@ Content-Type: application/json
     "password": "12345"
 }
 
-### 
+###
 // Login as a customer
 POST http://localhost:5000/login
 Content-Type: application/json
@@ -74,14 +74,9 @@ Content-Type: application/json
     "role": "Customer"
 }
 
-### 
+###
 // Delete user
 DELETE http://localhost:5000/users/a242c71b-90fa-479a-a8e2-48dad88e2d64
-
-### 
-// Get pengiriman
-
-GET http://localhost:5000/pengiriman
 
 ###
 GET https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json

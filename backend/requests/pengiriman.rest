@@ -1,0 +1,32 @@
+### 
+// Get pengiriman
+GET http://localhost:5000/pengiriman
+
+### 
+// Create pengiriman
+POST http://localhost:5000/pengiriman
+Content-Type: application/json
+
+{
+    "uuid_pengiriman": "uuid_pengiriman",
+    "uuid_user": "01900ca6-512b-7779-bbc3-84807ac2fe4b",
+    "id_kategori_barang": 1,
+    "nama_pengirim": "Tono Hartanto",
+    "id_provinsi_pengirim": 1,
+    "id_kabupaten_kota_pengirim": 1,
+    "kode_pos_pengirim": "15422",
+    "no_tlp_pengirim": "",
+    "nama_penerima": "Andi",
+    "id_provinsi_penerima": 1,
+    "id_kabupaten_kota_penerima": 1,
+    "kode_pos_penerima": "15038",
+    "no_tlp_penerima": "0846372323",
+    "nama_barang": "nama_barang_value",
+    "jumlah_barang": 2,
+    "berat": 2.0,
+    "harga_pengiriman": 20000,
+    "tanggal": "2024-06-13",
+    "id_layanan": 1,
+    "deskripsi": "deskripsi_value",
+    "no_resi": "202302022023"
+}
