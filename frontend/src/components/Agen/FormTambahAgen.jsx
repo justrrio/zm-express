@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { IoArrowBackCircleSharp } from 'react-icons/io5';
 
 function FormTambahAgen() {
     return (
@@ -10,9 +11,9 @@ function FormTambahAgen() {
                     <div className="content">
                         <form>
                             <div className="field">
-                                <label className="label">Nama</label>
+                                <label className="label">Nama Tempat</label>
                                 <div className="control">
-                                    <input type="text" className="input" placeholder='Masukkan Nama...' />
+                                    <input type="text" className="input" placeholder='Masukkan nama tempat...' />
                                 </div>
                             </div>
                             <div className="field">

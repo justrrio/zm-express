@@ -1,12 +1,16 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React from "react";
+import { createRoot } from "react-dom/client";
 // Redux toolkit
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import App from "./App";
 import "bulma/css/bulma.css";
+import axios from "axios";
 
-const container = document.getElementById('root');
+// !IMPORTANT
+axios.defaults.withCredentials = true; // If you don't set this up, you must to set the credentials per request
+
+const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
