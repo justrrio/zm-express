@@ -1,7 +1,12 @@
 // Tono: 54321
 // Andi: 12345
 
-### Login as an admin
+###
+// Get login info
+GET http://localhost:5000/me
+
+### 
+// Login as an admin
 POST http://localhost:5000/login
 Content-Type: application/json
 
@@ -21,8 +26,14 @@ Content-Type: application/json
 }
 
 ###
-// Get login info
-GET http://localhost:5000/me
+// Login as a customer
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "putri@gmail.com",
+    "password": "67890"
+}
 
 ###
 // Logout
@@ -61,6 +72,20 @@ Content-Type: application/json
 }
 
 ###
+// Create new user (Customer)
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Putri Handayani",
+    "email": "putri@gmail.com",
+    "password": "67890",
+    "confirmPassword": "67890",
+    "phoneNumber": "+6287546573234",
+    "role": "Customer"
+}
+
+###
 // Update user
 PATCH http://localhost:5000/users/4eecc385-c92b-4bae-bdf9-d8c7dc2f4d3f
 Content-Type: application/json
@@ -77,10 +102,4 @@ Content-Type: application/json
 ###
 // Delete user
 DELETE http://localhost:5000/users/a242c71b-90fa-479a-a8e2-48dad88e2d64
-
-###
-GET https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json
-
-###
-GET https://emsifa.github.io/api-wilayah-indonesia/api/regencies/36.json
 

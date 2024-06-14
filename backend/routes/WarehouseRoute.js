@@ -11,9 +11,9 @@ import {
 const router = express.Router();
 
 router.get('/warehouse', verifyUser, adminOnly, getWarehouseController);
-router.get('/warehouse:id', verifyUser, adminOnly, getWarehouseByIdController);
+router.get('/warehouse/:uuid_warehouse', verifyUser, adminOnly, getWarehouseByIdController);
 router.post('/warehouse', verifyUser, adminOnly, createWarehouseController);
-router.patch('/warehouse', verifyUser, adminOnly, updateWarehouseController);
-router.delete('/warehouse', verifyUser, adminOnly, deleteWarehouseController);
+router.patch('/warehouse/:uuid_warehouse', verifyUser, adminOnly, updateWarehouseController);
+router.delete('/warehouse/:uuid_warehouse', verifyUser, adminOnly, deleteWarehouseController);
 
 export default router;

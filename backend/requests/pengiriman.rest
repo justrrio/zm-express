@@ -2,13 +2,12 @@
 // Get pengiriman
 GET http://localhost:5000/pengiriman
 
-### 
+###
 // Create pengiriman
 POST http://localhost:5000/pengiriman
 Content-Type: application/json
 
 {
-    "uuid_pengiriman": "uuid_pengiriman",
     "uuid_user": "01900ca6-512b-7779-bbc3-84807ac2fe4b",
     "id_kategori_barang": 1,
     "nama_pengirim": "Tono Hartanto",
@@ -27,8 +26,34 @@ Content-Type: application/json
     "harga_pengiriman": 20000,
     "tanggal": "2024-06-13",
     "id_layanan": 1,
-    "deskripsi": "deskripsi_value",
-    "no_resi": "202302022023"
+    "deskripsi": "deskripsi_value"
+}
+
+### 
+// Update pengiriman
+PATCH http://localhost:5000/pengiriman/01901213-3a37-7943-82a1-dc27ac31897f
+Content-Type: application/json
+
+{
+    "uuid_user": "01900ca6-512b-7779-bbc3-84807ac2fe4b",
+    "id_kategori_barang": 1,
+    "nama_pengirim": "Tono Hartanto",
+    "id_provinsi_pengirim": 1,
+    "id_kabupaten_kota_pengirim": 2,
+    "kode_pos_pengirim": "15422",
+    "no_tlp_pengirim": "",
+    "nama_penerima": "Andi",
+    "id_provinsi_penerima": 1,
+    "id_kabupaten_kota_penerima": 1,
+    "kode_pos_penerima": "15038",
+    "no_tlp_penerima": "0846372323",
+    "nama_barang": "nama_barang_value",
+    "jumlah_barang": 4,
+    "berat": 2.0,
+    "harga_pengiriman": 20000,
+    "tanggal": "2024-06-13",
+    "id_layanan": 1,
+    "deskripsi": "ini adalah deskripsi"
 }
 
 ###

@@ -16,8 +16,10 @@ import session from 'express-session'; // Session from express
 import UserRoutes from './routes/UserRoute.js';
 import AuthRoutes from './routes/AuthRoute.js';
 import PengirimanRoutes from './routes/PengirimanRoute.js';
-import AgenRoutes from './routes/AgenRoute.js'
-import WarehouseRoutes from './routes/WarehouseRoute.js'
+import AgenRoutes from './routes/AgenRoute.js';
+import WarehouseRoutes from './routes/WarehouseRoute.js';
+import LayananRoutes from './routes/LayananRoute.js';
+import KategoriBarangRoutes from './routes/KategoriBarangRoute.js';
 
 const app = express();
 
@@ -53,6 +55,8 @@ app.use(UserRoutes);
 app.use(PengirimanRoutes);
 app.use(AgenRoutes);
 app.use(WarehouseRoutes);
+app.use(LayananRoutes);
+app.use(KategoriBarangRoutes);
 
 // Listen to specified port
 app.listen(process.env.APP_PORT, () => {

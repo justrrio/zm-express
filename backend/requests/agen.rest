@@ -10,3 +10,13 @@ Content-Type: application/json
     "nama_agen": "Agen Sukamaju",
     "alamat_agen": "Jl. Maju Sendiri II"
 }
+
+### 
+// Update agen
+PATCH http://localhost:5000/agen/01900fe2-6a76-7055-8217-c47ec65844d7
+Content-Type: application/json
+
+{
+    "nama_agen": "Agen Perubahan",
+    "alamat_agen": "Jl. Sukamaju III"
+}

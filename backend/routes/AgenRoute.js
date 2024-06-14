@@ -11,9 +11,9 @@ import {
 const router = express.Router();
 
 router.get('/agen', verifyUser, adminOnly, getAgenController);
-router.get('/agen:id', verifyUser, adminOnly, getAgenByIdController);
+router.get('/agen/:uuid_agen', verifyUser, adminOnly, getAgenByIdController);
 router.post('/agen', verifyUser, adminOnly, createAgenController);
-router.patch('/agen', verifyUser, adminOnly, updateAgenController);
-router.delete('/agen', verifyUser, adminOnly, deleteAgenController);
+router.patch('/agen/:uuid_agen', verifyUser, adminOnly, updateAgenController);
+router.delete('/agen/:uuid_agen', verifyUser, adminOnly, deleteAgenController);
 
 export default router;

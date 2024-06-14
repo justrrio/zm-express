@@ -8,9 +8,11 @@ import { uuidv7 } from 'uuidv7';
 export const getPengirimanModel = () => {
     const query = `
         SELECT 
+            no_resi,
+            uuid_user,
             nama_pengirim, p_pengirim.nama_provinsi AS p_pengirim, kk_pengirim.nama_kabupaten_kota AS kk_pengirim, kode_pos_pengirim, no_tlp_pengirim, 
             nama_penerima, p_penerima.nama_provinsi AS p_penerima, kk_penerima.nama_kabupaten_kota AS kk_penerima, kode_pos_penerima, no_tlp_penerima,
-            nama_barang, jumlah_barang, berat, harga_pengiriman, tanggal, l.nama_layanan AS nama_layanan, deskripsi, no_resi
+            nama_barang, jumlah_barang, berat, harga_pengiriman, tanggal, l.nama_layanan AS nama_layanan, deskripsi
         FROM 
             pengiriman
         INNER JOIN provinsi AS p_pengirim ON p_pengirim.id_provinsi = pengiriman.id_provinsi_pengirim
@@ -33,10 +35,12 @@ export const getPengirimanModel = () => {
 
 export const getPengirimanByIdModel = (uuid_user) => {
     const query = `
-        SELECT 
+        SELECT
+            no_resi, 
+            uuid_user,
             nama_pengirim, p_pengirim.nama_provinsi AS p_pengirim, kk_pengirim.nama_kabupaten_kota AS kk_pengirim, kode_pos_pengirim, no_tlp_pengirim, 
             nama_penerima, p_penerima.nama_provinsi AS p_penerima, kk_penerima.nama_kabupaten_kota AS kk_penerima, kode_pos_penerima, no_tlp_penerima,
-            nama_barang, jumlah_barang, berat, harga_pengiriman, tanggal, l.nama_layanan AS nama_layanan, deskripsi, no_resi
+            nama_barang, jumlah_barang, berat, harga_pengiriman, tanggal, l.nama_layanan AS nama_layanan, deskripsi
         FROM 
             pengiriman
         INNER JOIN provinsi AS p_pengirim ON p_pengirim.id_provinsi = pengiriman.id_provinsi_pengirim
@@ -60,19 +64,19 @@ export const getPengirimanByIdModel = (uuid_user) => {
 export const createPengirimanModel = (pengirimanData) => {
     const query = `
         INSERT INTO pengiriman (
-            uuid_pengiriman, uuid_user, id_kategori_barang, nama_pengirim, id_provinsi_pengirim, 
+            no_resi, uuid_user, id_kategori_barang, nama_pengirim, id_provinsi_pengirim, 
             id_kabupaten_kota_pengirim, kode_pos_pengirim, no_tlp_pengirim, 
             nama_penerima, id_provinsi_penerima, id_kabupaten_kota_penerima, 
             kode_pos_penerima, no_tlp_penerima, nama_barang, jumlah_barang, 
-            berat, harga_pengiriman, tanggal, id_layanan, deskripsi, no_resi, created_date, updated_date
+            berat, harga_pengiriman, tanggal, id_layanan, deskripsi, created_date, updated_date
         ) VALUES (
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
         );
     `;
 
-    const uuid_pengiriman = uuidv7();
+    const no_resi = uuidv7();
     const values = [
-        uuid_pengiriman,
+        no_resi,
         pengirimanData.uuid_user,
         pengirimanData.id_kategori_barang,
         pengirimanData.nama_pengirim,
@@ -128,13 +132,13 @@ export const updatePengirimanModel = (pengirimanData) => {
             harga_pengiriman = ?, 
             tanggal = ?, 
             id_layanan = ?, 
-            deskripsi = ?
+            deskripsi = ?,
             updated_date = CURRENT_TIMESTAMP
         WHERE
             no_resi = ?;
     `;
+    console.log("No Resi:", pengirimanData.no_resi);
     const values = [
-        pengirimanData.uuid_pengiriman,
         pengirimanData.uuid_user,
         pengirimanData.id_kategori_barang,
         pengirimanData.nama_pengirim,
@@ -161,6 +165,7 @@ export const updatePengirimanModel = (pengirimanData) => {
             if (err) {
                 reject(err);
             } else {
+                console.log("RESULT:", results);
                 resolve(results);
             }
         });

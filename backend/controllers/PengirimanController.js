@@ -28,8 +28,8 @@ export const getPengirimanController = async (req, res) => {
 
 export const getPengirimanByIdController = async (req, res) => {
     try {
-        const { uuid_pengiriman } = req.params;
-        const result = await getPengirimanByIdModel(uuid_pengiriman).catch((messagePengiriman) => {
+        const { no_resi } = req.params;
+        const result = await getPengirimanByIdModel(no_resi).catch((messagePengiriman) => {
             throw new Error(messagePengiriman);
         });
         res.status(200).json(result);
@@ -41,7 +41,7 @@ export const getPengirimanByIdController = async (req, res) => {
 export const createPengirimanController = async (req, res) => {
     const data = {
         // Data pengirim
-        uuid_pengiriman: req.body.uuid_pengiriman,
+        no_resi: req.body.no_resi,
         uuid_user: req.body.uuid_user,
         id_kategori_barang: req.body.id_kategori_barang,
         nama_pengirim: req.body.nama_pengirim,
@@ -64,11 +64,12 @@ export const createPengirimanController = async (req, res) => {
         tanggal: req.body.tanggal,
         id_layanan: req.body.id_layanan,
         deskripsi: req.body.deskripsi,
-        no_resi: req.body.no_resi,
     };
 
     try {
-        const results = await createPengirimanModel(data);
+        const results = await createPengirimanModel(data).catch((message) => {
+            throw new Error(message);
+        });
         res.status(200).json({messagePengiriman: "Pengiriman telah berhasil dibuat!"});
     } catch (err) {
         res.status(500).json({errMessagePengiriman: err.message});
@@ -76,9 +77,11 @@ export const createPengirimanController = async (req, res) => {
 }
 
 export const updatePengirimanController = async (req, res) => {
+    const { no_resi } = req.params;
+
     const data = {
         // Data pengirim
-        uuid_pengiriman: req.body.uuid_pengiriman,
+        no_resi: no_resi,
         uuid_user: req.body.uuid_user,
         id_kategori_barang: req.body.id_kategori_barang,
         nama_pengirim: req.body.nama_pengirim,
@@ -101,12 +104,37 @@ export const updatePengirimanController = async (req, res) => {
         tanggal: req.body.tanggal,
         id_layanan: req.body.id_layanan,
         deskripsi: req.body.deskripsi,
-        no_resi: req.body.no_resi,
     };
 
     try {
-        const results = await updatePengirimanModel(data);
-        res.status(200).json({messagePengiriman: "Pengiriman telah berhasil diupdate!"});
+        const results = await updatePengirimanModel(data).catch((message) => {
+            throw new Error(message);
+        });
+
+        // Cek jika tidak ada data di dalam database
+        if (Array.isArray(results) && results.length === 0) {
+            return res.status(400).json({message: "Data pengiriman tidak ditemukan!"});
+        }
+
+        res.status(200).json({messagePengiriman: "Pengiriman berhasil diupdate!"});
+    } catch (err) {
+        res.status(500).json({errMessagePengiriman: err.message});
+    }
+}
+
+export const deletePengirimanController = async (req, res) => {
+    const { no_resi } = req.params;
+    try {
+        const results = await deletePengirimanController(no_resi).catch((message) => {
+            throw new Error(message);
+        });
+
+        // Cek jika tidak ada data di dalam database
+        if (Array.isArray(results) && results.length === 0) {
+            return res.status(400).json({message: "Data pengiriman tidak ditemukan!"});
+        }
+        
+        res.status(200).json({message: "Pengiriman berhasil dihapus!"});
     } catch (err) {
         res.status(500).json({errMessagePengiriman: err.message});
     }
@@ -114,7 +142,9 @@ export const updatePengirimanController = async (req, res) => {
 
 export const getProvinsiController = async (req, res) => {
     try {
-        const results = await getProvinsiModel();
+        const results = await getProvinsiModel().catch((message) => {
+            throw new Error(message);
+        });
         res.status(200).json({results});
     } catch (err) {
         res.status(500).json({errMessageLokasi: err.message});
@@ -123,7 +153,9 @@ export const getProvinsiController = async (req, res) => {
 
 export const getKabupatenKotaController = async (req, res) => {
     try {
-        const results = await getKabupatenKotaModel();
+        const results = await getKabupatenKotaModel().catch((message) => {
+            throw new Error(message);
+        });
         res.status(200).json({results});
     } catch (err) {
         res.status(500).json({errMessageLokasi: err.message});
@@ -132,7 +164,9 @@ export const getKabupatenKotaController = async (req, res) => {
 
 export const getLayananController = async (req, res) => {
     try {
-        const results = await getLayananModel();
+        const results = await getLayananModel().catch((message) => {
+            throw new Error(message);
+        });
         res.status(200).json({results});
     } catch (err) {
         res.status(500).json({errMessageLokasi: err.message});
