@@ -8,7 +8,7 @@ import ListLayanan from '../../components/Layanan/ListLayanan';
 const Layanan = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isError, user } = useSelector((state) => state.auth);
+    const { isError } = useSelector((state) => state.auth);
 
     useEffect(() => {
         dispatch(getMe());
@@ -18,10 +18,7 @@ const Layanan = () => {
         if (isError) {
             navigate("/login");
         }
-        if (user && user.role !== 'Admin') {
-            navigate("/dashboard");
-        }
-    }, [isError, user, navigate]);
+    }, [isError, navigate]);
     return (
         <Layout>
             <ListLayanan />

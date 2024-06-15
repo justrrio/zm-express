@@ -29,18 +29,20 @@ const ListUser = () => {
                 <thead className='has-text-grey-darker'>
                     <tr>
                         <th>No.</th>
-                        <th>Name</th>
                         <th>Email</th>
+                        <th>Nama Lengkap</th>
+                        <th>No. Telepon</th>
                         <th>Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user, index) => (
-                        <tr key={user.uuid}>
+                        <tr key={user.uuid_user}>
                             <td>{index + 1}</td>
-                            <td>{user.name}</td>
                             <td>{user.email}</td>
+                            <td>{user.nama_lengkap}</td>
+                            <td>{user.no_tlp}</td>
                             <td>{user.role}</td>
                             <td>
                                 <Link

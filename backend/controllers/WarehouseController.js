@@ -14,7 +14,7 @@ export const getWarehouseController = async (req, res) => {
 
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({ errMessageWarehouse: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
@@ -30,16 +30,16 @@ export const getWarehouseByIdController = async (req, res) => {
 
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({ errMessageWarehouse: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
 export const createWarehouseController = async (req, res) => {
   const data = {
-    nama_warehouse: req.body.nama_warehouse,
-    id_provinsi_warehouse: req.body.id_provinsi_warehouse,
-    id_kabupaten_kota_warehouse: req.body.id_kabupaten_kota_warehouse,
-    alamat_warehouse: req.body.alamat_warehouse,
+    namaWarehouse: req.body.namaWarehouse,
+    idProvinsiWarehouse: req.body.idProvinsiWarehouse,
+    idKabupatenKotaWarehouse: req.body.idKabupatenKotaWarehouse,
+    alamatWarehouse: req.body.alamatWarehouse,
   };
 
   try {
@@ -49,7 +49,7 @@ export const createWarehouseController = async (req, res) => {
 
     res.status(200).json({ message: "Data warehouse berhasil dibuat!" });
   } catch (err) {
-    res.status(500).json({ errMessageWarehouse: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
@@ -75,7 +75,7 @@ export const updateWarehouseController = async (req, res) => {
     }
     res.status(200).json({ message: "Data warehouse berhasil diupdate!" });
   } catch (err) {
-    res.status(500).json({ errMessageWarehouse: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 

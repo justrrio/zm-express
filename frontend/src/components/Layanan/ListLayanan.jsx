@@ -20,6 +20,14 @@ const ListLayanan = () => {
         await axios.delete(`http://localhost:5000/layanan/${id_layanan}`);
         getLayanan();
     };
+
+    function formatRupiah(harga) {
+        const rupiah = new Intl.NumberFormat("id", {
+            style: "currency",
+            currency: "IDR",
+        }).format(harga)
+        return rupiah
+    }
     return (
         <div>
             <h1 className='title'>Layanan</h1>
@@ -41,7 +49,7 @@ const ListLayanan = () => {
                         <tr key={layanan.id_layanan}>
                             <td>{index + 1}</td>
                             <td>{layanan.nama_layanan}</td>
-                            <td>{layanan.harga_layanan}</td>
+                            <td>{formatRupiah(layanan.harga_layanan)}</td>
                             <td>
                                 <Link
                                     to={`/layanan/edit/${layanan.id_layanan}`}

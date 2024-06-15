@@ -16,6 +16,7 @@ const Users = () => {
 
     useEffect(() => {
         if (isError) {
+            console.log("isError:", isError);
             navigate("/login");
         }
         if (user && user.role !== 'Admin') {

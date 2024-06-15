@@ -31,7 +31,7 @@ export const getLayananByIdModel = (id_layanan) => {
 export const createLayananModel = (data) => {
   const query = `INSERT INTO layanan(nama_layanan, harga_layanan, created_date, updated_date) VALUES(?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);`;
 
-  const values = [data.nama_agen, data.alamat_agen];
+  const values = [data.namaLayanan, data.hargaLayanan];
 
   return new Promise((resolve, reject) => {
     pool.query(query, values, (err, results, fields) => {

@@ -174,7 +174,7 @@ export const updatePengirimanModel = (pengirimanData) => {
 
 // Get Provinsi
 export const getProvinsiModel = () => {
-  const query = `SELECT * FROM provinsi`;
+  const query = `SELECT id_provinsi, nama_provinsi FROM provinsi;`;
 
   return new Promise((resolve, reject) => {
     pool.query(query, (err, results, fields) => {
@@ -189,7 +189,7 @@ export const getProvinsiModel = () => {
 
 // Get Kabupaten/Kota
 export const getKabupatenKotaModel = () => {
-  const query = `SELECT * FROM kabupaten_kota;`;
+  const query = `SELECT id_kabupaten_kota, nama_kabupaten_kota FROM kabupaten_kota;`;
 
   return new Promise((resolve, reject) => {
     pool.query(query, (err, results, fields) => {

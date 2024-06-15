@@ -67,3 +67,6 @@ GET http://localhost:5000/kabupaten-kota
 ###
 // Get layanan
 Get http://localhost:5000/layanan
+
+###
+GET http://localhost:5000/warehouse

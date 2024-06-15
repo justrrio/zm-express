@@ -44,10 +44,16 @@ export const getWarehouseByIdModel = (uuid_warehouse) => {
 };
 
 export const createWarehouseModel = (data) => {
-  const query = `INSERT INTO warehouse(uuid_warehouse, nama_warehouse, id_provinsi_warehouse, id_kabupaten_kota_warehouse, alamat_warehouse, created_date, updated_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);`;
+  const query = `INSERT INTO warehouse(uuid_warehouse, nama_warehouse, id_provinsi_warehouse, id_kabupaten_kota_warehouse, alamat_warehouse, created_date, updated_date) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);`;
 
-  const uuid_warehouse = uuidv7();
-  const values = [uuid_warehouse, data.nama_warehouse, data.alamat_warehouse];
+  const uuidWarehouse = uuidv7();
+  const values = [
+    uuidWarehouse,
+    data.namaWarehouse,
+    data.idProvinsiWarehouse,
+    data.idKabupatenKotaWarehouse,
+    data.alamatWarehouse,
+  ];
   return new Promise((resolve, reject) => {
     pool.query(query, values, (err, results, fields) => {
       if (err) {

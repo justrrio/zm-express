@@ -11,17 +11,15 @@ export const getLayananController = async (req, res) => {
     const results = await getLayananModel().catch((message) => {
       throw new Error(message);
     });
-    console.log("RESULT LAYANAN:", results);
 
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({ errMessageLayanan: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
 export const getLayananByIdController = async (req, res) => {
   const { id_layanan } = req.params;
-  console.log("ID Layanan:", id_layanan);
 
   try {
     const results = await getLayananByIdModel(id_layanan).catch((message) => {
@@ -30,14 +28,14 @@ export const getLayananByIdController = async (req, res) => {
 
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({ errMessageLayanan: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
 export const createLayananController = async (req, res) => {
   const data = {
-    nama_layanan: req.body.nama_layanan,
-    harga_layanan: req.body.harga_layanan,
+    namaLayanan: req.body.namaLayanan,
+    hargaLayanan: req.body.hargaLayanan,
   };
 
   try {
@@ -47,7 +45,7 @@ export const createLayananController = async (req, res) => {
 
     res.status(200).json({ message: "Layanan baru berhasil dibuat!" });
   } catch (err) {
-    res.status(500).json({ errMessageLayanan: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
@@ -71,7 +69,7 @@ export const updateLayananController = async (req, res) => {
 
     res.status(200).json({ message: "Data agen berhasil diupdate!" });
   } catch (err) {
-    res.status(500).json({ errMessageLayanan: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
@@ -99,6 +97,6 @@ export const deleteLayananController = async (req, res) => {
     );
     res.status(200).json({ message: "Layanan berhasil dihapus!" });
   } catch (error) {
-    res.status(400).json({ errMessageLayanan: error.message });
+    res.status(400).json({ errorMessage: error.message });
   }
 };

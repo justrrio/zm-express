@@ -11,6 +11,7 @@ function ListWarehouse() {
 
     const getWarehouse = async () => {
         const response = await axios.get("http://localhost:5000/warehouse");
+        console.log("RESPONSE Warehouse:", response);
         setwarehouse(response.data);
     };
 
@@ -40,14 +41,14 @@ function ListWarehouse() {
                     {warehouse.map((warehouse, index) => (
                         <tr key={warehouse.uuid_warehouse}>
                             <td>{index + 1}</td>
-                            <td>{warehouse.nama_agen}</td>
-                            <td>{warehouse.provinsi_agen}</td>
-                            <td>{warehouse.kabupaten_kota_agen}</td>
-                            <td>{warehouse.alamat_agen}</td>
+                            <td>{warehouse.nama_warehouse}</td>
+                            <td>{warehouse.provinsi_warehouse}</td>
+                            <td>{warehouse.kabupaten_kota_warehouse}</td>
+                            <td>{warehouse.alamat_warehouse}</td>
                             <td>
                                 <Link
                                     to={`/warehouse/edit/${warehouse.uuid_warehouse}`}
-                                    className="button is-small is-info"
+                                    className="button is-small is-info mr-2"
                                 >
                                     Edit
                                 </Link>

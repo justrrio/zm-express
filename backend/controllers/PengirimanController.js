@@ -158,7 +158,7 @@ export const getProvinsiController = async (req, res) => {
     const results = await getProvinsiModel().catch((message) => {
       throw new Error(message);
     });
-    res.status(200).json({ results });
+    res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ errMessageLokasi: err.message });
   }
@@ -169,19 +169,19 @@ export const getKabupatenKotaController = async (req, res) => {
     const results = await getKabupatenKotaModel().catch((message) => {
       throw new Error(message);
     });
-    res.status(200).json({ results });
+    res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ errMessageLokasi: err.message });
   }
 };
 
-export const getLayananController = async (req, res) => {
-  try {
-    const results = await getLayananModel().catch((message) => {
-      throw new Error(message);
-    });
-    res.status(200).json({ results });
-  } catch (err) {
-    res.status(500).json({ errMessageLokasi: err.message });
-  }
-};
+// export const getLayananController = async (req, res) => {
+//   try {
+//     const results = await getLayananModel().catch((message) => {
+//       throw new Error(message);
+//     });
+//     res.status(200).json({ results });
+//   } catch (err) {
+//     res.status(500).json({ errMessageLokasi: err.message });
+//   }
+// };

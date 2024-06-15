@@ -14,7 +14,7 @@ export const getAgenController = async (req, res) => {
 
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({ errMessageAgen: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
@@ -28,17 +28,19 @@ export const getAgenByIdController = async (req, res) => {
 
     res.status(200).json(results);
   } catch (err) {
-    res.status(500).json({ errMessageAgen: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
 export const createAgenController = async (req, res) => {
   const data = {
-    nama_agen: req.body.nama_agen,
-    id_provinsi_agen: req.body.id_provinsi_agen,
-    id_kabupaten_kota_agen: req.body.id_kabupaten_kota_agen,
-    alamat_agen: req.body.alamat_agen,
+    namaAgen: req.body.namaAgen,
+    idProvinsiAgen: req.body.idProvinsiAgen,
+    idKabupatenKotaAgen: req.body.idKabupatenKotaAgen,
+    alamatAgen: req.body.alamatAgen,
   };
+
+  console.log("KABUSKSDF", data.idKabupatenKotaAgen);
 
   try {
     const results = await createAgenModel(data).catch((message) => {
@@ -47,7 +49,7 @@ export const createAgenController = async (req, res) => {
 
     res.status(200).json({ message: "Data agen berhasil dibuat!" });
   } catch (err) {
-    res.status(500).json({ errMessageAgen: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
@@ -74,7 +76,7 @@ export const updateAgenController = async (req, res) => {
 
     res.status(200).json({ message: "Data agen berhasil diupdate!" });
   } catch (err) {
-    res.status(500).json({ errMessageAgen: err.message });
+    res.status(500).json({ errorMessage: err.message });
   }
 };
 
@@ -102,6 +104,6 @@ export const deleteAgenController = async (req, res) => {
     });
     res.status(200).json({ message: "Data agen berhasil dihapus!" });
   } catch (error) {
-    res.status(400).json({ errMessageAgen: error.message });
+    res.status(400).json({ errorMessage: error.message });
   }
 };
